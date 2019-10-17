@@ -1,8 +1,5 @@
 #!/usr/bin/env Rscript
 
-library('tibble')
-library('dplyr')
-
 source('read-data.R')
 
 Rprof(tmp <- tempfile()) # start profiling
