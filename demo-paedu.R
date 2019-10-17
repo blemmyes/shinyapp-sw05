@@ -2,13 +2,14 @@
 library('rjson')
 
 dataFrame <- data.frame()
-jsonData <- fromJSON(file='dataset.json')
+jsonData <- fromJSON(file='small.json')
 for (recordSet in jsonData) {
     category <- recordSet$measurement
     unit <- recordSet$unit
-    l <- length(recordSet$data)
-    tmp <- data.frame(recordSet$data)
-    df <- data.frame(rep(category, l), rep(unit, l), tmp$time, tmp$value)
-    dataFrame <- rbind(dataFrame, df)
+    for (pair in recordSet$data) {
+        record <- data.frame(category, unit, pair$time, pair$value)
+        dataFrame <- rbind(record, dataFrame)
+    }
 }
+names(dataFrame) <- c('category', 'unit', 'time', 'value')
 print(dataFrame)
