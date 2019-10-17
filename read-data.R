@@ -4,7 +4,7 @@ library('tibble')
 library('dplyr')
 
 # read in the whole data frame
-jsonData <- fromJSON(file='small.json')
+jsonData <- fromJSON(file='dataset.json')
 dataFrame <- data.frame()
 for (recordSet in jsonData) {
     measurement <- recordSet$measurement
