@@ -1,8 +1,15 @@
 #!/usr/bin/env Rscript
 library('rjson')
 
+dataFrame <- data.frame()
 jsonData <- fromJSON(file='dataset.json')
-print(jsonData[[1]]$measurement)
-print(jsonData[[2]]$measurement)
-print(jsonData[[3]]$measurement)
-print(jsonData[[4]]$measurement)
+for (recordSet in jsonData) {
+    category <- recordSet$measurement
+    unit <- recordSet$unit
+    data <- recordSet$data
+    for (record in data) {
+        entry <- data.frame(category, unit, record$time, record$value)
+        dataFrame <- rbind(dataFrame, entry)
+    }
+}
+print(dataFrame)
