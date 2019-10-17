@@ -1,5 +1,8 @@
+#!/usr/bin/env Rscript
 library('rjson')
 
 jsonData <- fromJSON(file='dataset.json')
-jsonDataFrame <- as.data.frame(jsonData)
-print(jsonDataFrame)
+print(jsonData[[1]]$measurement)
+print(jsonData[[2]]$measurement)
+print(jsonData[[3]]$measurement)
+print(jsonData[[4]]$measurement)
