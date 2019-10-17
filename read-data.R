@@ -1,8 +1,11 @@
 #!/usr/bin/env Rscript
 library('rjson')
+library('tibble')
+library('dplyr')
 
+# read in the whole data frame
+jsonData <- fromJSON(file='small.json')
 dataFrame <- data.frame()
-jsonData <- fromJSON(file='big.json')
 for (recordSet in jsonData) {
     measurement <- recordSet$measurement
     unit <- recordSet$unit
@@ -13,4 +16,8 @@ for (recordSet in jsonData) {
     dataFrame <- rbind(dataFrame, df)
 }
 names(dataFrame) <- c('time', 'value', 'measurement', 'unit')
-print(dataFrame)
+tibble <- as_tibble(dataFrame)
+
+# Example: select all temperature and humidity entries
+tempHumid <- filter(tibble, measurement == 'temperature' | measurement == 'humidity')
+print(tempHumid)
