@@ -6,10 +6,9 @@ jsonData <- fromJSON(file='dataset.json')
 for (recordSet in jsonData) {
     category <- recordSet$measurement
     unit <- recordSet$unit
-    data <- recordSet$data
-    for (record in data) {
-        entry <- data.frame(category, unit, record$time, record$value)
-        dataFrame <- rbind(dataFrame, entry)
-    }
+    l <- length(recordSet$data)
+    tmp <- data.frame(recordSet$data)
+    df <- data.frame(rep(category, l), rep(unit, l), tmp$time, tmp$value)
+    dataFrame <- rbind(dataFrame, df)
 }
 print(dataFrame)
