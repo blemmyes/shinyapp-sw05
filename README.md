@@ -1,2 +1,9 @@
 # shinyapp-sw05
-R Shiny App Exercise for Data Science Basics
+
+Start Shiny Server:
+
+```bash
+$ ./1-plot.R
+```
+
+Open browser on [localhost:1337](http://localhost:1337).
