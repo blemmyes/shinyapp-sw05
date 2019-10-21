@@ -13,6 +13,7 @@ read_measurement_data <- function(json_file_path) {
         dataFrame <- rbind(dataFrame, df)
     }
     names(dataFrame) <- c('time', 'value', 'measurement', 'unit')
+    dataFrame$value <- as.double(as.character(dataFrame$value))
     return(dataFrame)
 }
 
