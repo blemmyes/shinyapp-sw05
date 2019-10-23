@@ -35,6 +35,7 @@ server <- function(input, output) {
         rolling_mean <- rollify(mean, window=valuesPerGroup)
 
         temperature <- mutate(temperature, value=rolling_mean(value))
+        temperature <- slice(temperature, valuesPerGroup:n())
         output$temperature <- renderPlot(ggplot(temperature, aes(x=time, y=value)) +
                                          geom_point() +
                                          ggtitle('Temperature') +
@@ -43,6 +44,7 @@ server <- function(input, output) {
                                          theme(axis.ticks.x=element_blank()))
 
         light <- mutate(light, value=rolling_mean(value))
+        light <- slice(light, valuesPerGroup:n())
         output$light <- renderPlot(ggplot(light, aes(x=time, y=value)) +
                                       geom_point() +
                                       ggtitle('Light') +
@@ -51,6 +53,7 @@ server <- function(input, output) {
                                       theme(axis.ticks.x=element_blank()))
 
         humidity <- mutate(humidity, value=rolling_mean(value))
+        humidity <- slice(humidity, valuesPerGroup:n())
         output$humidity <- renderPlot(ggplot(humidity, aes(x=time, y=value)) +
                                       geom_point() +
                                       ggtitle('Humidity') +
@@ -59,6 +62,7 @@ server <- function(input, output) {
                                       theme(axis.ticks.x=element_blank()))
 
         pressure <- mutate(pressure, value=rolling_mean(value))
+        pressure <- slice(pressure, valuesPerGroup:n())
         output$pressure <- renderPlot(ggplot(pressure, aes(x=time, y=value)) +
                                       geom_point() +
                                       ggtitle('Pressure') +
